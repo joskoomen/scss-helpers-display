@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+// block, inline, inline-block, table, table-row, table-cell, flex
+$display-values: (block, inline, inline-block, flex, none) !default;
+
+@mixin helpers-display($responsive : false) {
+  
+  @if $responsive {
+    @each $value in $display-values {
+      @each $classname in $breakpoint-classes {
+        @include breakpoint($classname) {
+          .#{$classname}-display-#{$value} {
+            display: #{$value};
+          }
+        }
+      }
+    }
+  } @else {
+    @each $value in $display-values {
+      .display-#{$value} {
+        display: #{$value};
+      }
+    }
+  }
+}
